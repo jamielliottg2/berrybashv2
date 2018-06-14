@@ -1,16 +1,15 @@
 /*
-    * Copyright 2018 Amazon.com, Inc. and its affiliates. All Rights Reserved.
-    * Licensed under the Amazon Software License (the "License").
-    * You may not use this file except in compliance with the License.
-    * A copy of the License is located at
-    * http://aws.amazon.com/asl/
-    * or in the "license" file accompanying this file. This file is distributed
-    * on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either
-    * express or implied. See the License for the specific language governing
-    * permissions and limitations under the License.
-    */
-    
-    const Alexa = require('ask-sdk');
+ * Copyright 2018 Amazon.com, Inc. and its affiliates. All Rights Reserved.
+ * Licensed under the Amazon Software License (the "License").
+ * You may not use this file except in compliance with the License.
+ * A copy of the License is located at
+ * http://aws.amazon.com/asl/
+ * or in the "license" file accompanying this file. This file is distributed
+ * on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either
+ * express or implied. See the License for the specific language governing
+ * permissions and limitations under the License.
+ */
+const Alexa = require('ask-sdk');
 
 /////////1. Static strings///////////////////////////////////Modify the hard coded data below to make this skill your own!///
 //Skill data
@@ -25,43 +24,43 @@ var mainImgBlurBG = 'https://s3.eu-west-2.amazonaws.com/jgsound/berryImages/main
 
 var topicData = {
     "raspberries": {
-        "imgURL": "https://s3.eu-west-2.amazonaws.com/jgsound/berryImages/raspberry-fruits-fresh-red-52536.jpeg",
+        "imgURL": "https://s3.amazonaws.com/ask-samples-resources/berryImages/raspberry-fruits-fresh-red-52536.jpeg",
         "info": "The Raspberry or Red Raspberry is the plant that produces a tart, sweet, red composite fruit in the late summer and early autumn. In proper botanical language, it is not a berry at all, but instead an aggregate fruit of numerous drupelets around the central core."
     },
     "blackberries": {
-        "imgURL": "https://s3.eu-west-2.amazonaws.com/jgsound/berryImages/pexels-photo-892808.jpeg",
+        "imgURL": "https://s3.amazonaws.com/ask-samples-resources/berryImages/pexels-photo-892808.jpeg",
         "info": "The blackberry is an edible fruit produced by many species in the Rubus genus in the Rosaceae family, hybrids among these species within the Rubus subgenus, and hybrids between the Rubus and Idaeobatus subgenera."
     },
     "strawberries": {
-        "imgURL": "https://s3.eu-west-2.amazonaws.com/jgsound/berryImages/pexels-photo-583840.jpeg",
+        "imgURL": "https://s3.amazonaws.com/ask-samples-resources/berryImages/pexels-photo-583840.jpeg",
         "info": "Strawberries are short-lived herbaceous perennials, producing for 2 to 3 years. Plant in an open, sunny position in raised beds; a good airflow will reduce fungal diseases. Strawberries prefer a well-drained soil, rich in humus. Dig in lots of organic matter, compost, animal manure or blood and bone, about a month before planting."
     },
     "blueberries": {
-        "imgURL": "https://s3.eu-west-2.amazonaws.com/jgsound/berryImages/summer-blueberries-stephanie-herington.jpg",
+        "imgURL": "https://s3.amazonaws.com/ask-samples-resources/berryImages/summer-blueberries-stephanie-herington.jpg",
         "info": "Blueberry is one of the highest antioxidant capacities among all fruits, vegetables, spices and seasonings. Antioxidants are necessary to optimizing fitness by helping to combat the free radicals that can damage cellular structures as well as DNA. Blueberries are small blue to black colored fruits with a green flesh. They should be rich and bright in color with a natural bloom."
     },
     "elderberries": {
-        "imgURL": "https://s3.eu-west-2.amazonaws.com/jgsound/berryImages/elder-black-elderberry-sambucus-nigra-holder-51962.jpeg",
+        "imgURL": "https://s3.amazonaws.com/ask-samples-resources/berryImages/elder-black-elderberry-sambucus-nigra-holder-51962.jpeg",
         "info": "Elderberry also known as Sambucus is from the family of Adoxaceae, which is a genus of flowering plant. Formerly placed in the honeysuckle family, the fruits when ripe are blackish purple in color and globose in shape. With seeds just about 3mm long, they are globular in shape and about 4 mm diameter, calyx persistent at the apex."
     },
     "gooseberries": {
-        "imgURL": "https://s3.eu-west-2.amazonaws.com/jgsound/berryImages/currant-immature-bush-berry-54332.jpeg",
+        "imgURL": "https://s3.amazonaws.com/ask-samples-resources/berryImages/currant-immature-bush-berry-54332.jpeg",
         "info": "Indian gooseberry fruits are of small size and light green in color. They have 6 vertical grooves on them. The taste of the fruit can be described as strong, harsh, and rough. This fruit is round shaped with vertical stripes and has a hard seed inside."
     },
     "cranberries": {
-        "imgURL": "https://s3.eu-west-2.amazonaws.com/jgsound/berryImages/pexels-photo-306800.jpeg",
+        "imgURL": "https://s3.amazonaws.com/ask-samples-resources/berryImages/pexels-photo-306800.jpeg",
         "info": "Cranberries are low, creeping shrubs or vines up to 2 metres long and 5 to 20 centimetres in height; they have slender, wiry stems that are not thickly woody and have small evergreen leaves. The flowers are dark pink, with very distinct reflexed petals, leaving the style and stamens fully exposed and pointing forward. They are pollinated by bees. The fruit is a berry that is larger than the leaves of the plant; it is initially light green, turning red when ripe. It is edible, but with an acidic taste that usually overwhelms its sweetness."
     },
     "huckleberries": {
-        "imgURL": "https://s3.eu-west-2.amazonaws.com/jgsound/berryImages/pexels-photo-139749.jpeg",
+        "imgURL": "https://s3.amazonaws.com/ask-samples-resources/berryImages/pexels-photo-139749.jpeg",
         "info": "Huckleberry otherwise called hurtleberry is the native fruit of North America. The fruit appear in various dark colors such as red, blue and black and each berry measures 5-10mm in diameter. The fruit is completely edible and possesses a unique sweet taste. These berries are used as a major flavoring agent in juice, tea, soup, pudding, pie, pancakes and jam. It is also used for treating pain and healing heart disease and infections."
     },
     "cherries": {
-        "imgURL": "https://s3.eu-west-2.amazonaws.com/jgsound/berryImages/pexels-photo-175727.jpeg",
+        "imgURL": "https://s3.amazonaws.com/ask-samples-resources/berryImages/pexels-photo-175727.jpeg",
         "info": "Cherries are found in the wild and have been domesticated for centuries. There is a myriad of cherry types, resulting from new varieties and hybrids developed for hardiness and flavor. This fruit is found in Asia, Europe, and North America, with Iran, Turkey, United States, Germany, and Italy leading in the production of cherries."
     },
     "gojiberries": {
-        "imgURL": "https://s3.eu-west-2.amazonaws.com/jgsound/berryImages/goji-3162716_640.jpg",
+        "imgURL": "https://s3.amazonaws.com/ask-samples-resources/berryImages/goji-3162716_640.jpg",
         "info": "Goji, goji berry, or wolfberry is the fruit of either the Lycium barbarum or Lycium chinense, two closely related species of boxthorn in the nightshade family, Solanaceae. The family also includes the potato, tomato, eggplant, belladonna, chili pepper, and tobacco. The two species are native to Asia."
     }
 }
@@ -86,26 +85,6 @@ var testingOnSim = false; //flip to experience voice only skill on display devic
 /////////2. Entry point and intent handlers//////////////////////////////////////////////////////////////////////////
 const skillBuilder = Alexa.SkillBuilders.standard();
 
-exports.handler = skillBuilder
-    .addRequestHandlers(
-        LaunchRequestHandler,
-        InformationIntentHandler,
-        YesIntentHandler,
-        NoIntentHandler,
-        HelpHandler,
-        ElementSelectedHandler,
-        HelpIntentHandler,
-        CancelIntentHandler,
-        StopIntentHandler,
-        RepeatIntentHandler,
-        MoreInfoIntentHandler,
-        QuizIntentHandler,
-        PreviousIntentHandler,
-        SessionEndedRequestHandler
-    )
-    .addErrorHandlers(ErrorHandler)
-    .lambda();
-    
 const LaunchRequestHandler = {
     canHandle(handlerInput) {
         return handlerInput.requestEnvelope.request.type === `LaunchRequest`;
@@ -130,7 +109,7 @@ const HelpHandler = {
     handle(handlerInput) {
         //Provide instructions based on skill state
         newSessionHandler(handlerInput);
-        
+
         const response = handlerInput.responseBuilder;
         const attributes = handlerInput.attributesManager.getSessionAttributes();
 
@@ -139,11 +118,11 @@ const HelpHandler = {
 
         if (attributes.skillState == 'gamePlaying') {
             speechOutput = 'In ' + skillQuizName + ', you simply need to select the option that most resembles the ' + categorySingular + ' being asked for in the question; either say 1 - 4, or touch the screen!';
-            
+
             response.withShouldEndSession(null);
-            
+
             saveLastThingSaid(handlerInput, speechOutput);
-            
+
             response.speak(speechOutput).getResponse();
         } else {
             return showSkillIntro(speechOutput, reprompt, handlerInput);
@@ -207,47 +186,46 @@ const PreviousIntentHandler = {
     },
 };
 
-function QuizFunction(handlerInput)
-{
-  newSessionHandler(handlerInput);
-  var speechOutput;
-  var reprompt;
+function QuizFunction(handlerInput) {
+    newSessionHandler(handlerInput);
+    var speechOutput;
+    var reprompt;
 
-  resetAttributes(handlerInput);
+    resetAttributes(handlerInput);
 
-  const attributes = handlerInput.attributesManager.getSessionAttributes();
+    const attributes = handlerInput.attributesManager.getSessionAttributes();
 
-  const response = handlerInput.responseBuilder;
+    const response = handlerInput.responseBuilder;
 
-  if (attributes.skillState != 'gamePlaying') {
-      if (supportsDisplay(handlerInput) && !testingOnSim) {
-          speechOutput = '<say-as interpret-as="interjection">dun dun dun.</say-as> Check out the big brains over here. Are you ready to begin?';
-          reprompt = "Are you ready to begin?";
+    if (attributes.skillState != 'gamePlaying') {
+        if (supportsDisplay(handlerInput) && !testingOnSim) {
+            speechOutput = '<say-as interpret-as="interjection">dun dun dun.</say-as> Check out the big brains over here. Are you ready to begin?';
+            reprompt = "Are you ready to begin?";
 
-          attributes.quizArray = attributes.mainArray;
-          attributes.skillState = 'quizMainMenu';
+            attributes.quizArray = attributes.mainArray;
+            attributes.skillState = 'quizMainMenu';
 
-          handlerInput.attributesManager.setSessionAttributes(attributes);
+            handlerInput.attributesManager.setSessionAttributes(attributes);
 
-          return bodyTemplateMaker('BodyTemplate7', handlerInput, mainImage, 'Time to play ' + skillQuizName + '!', null, null, speechOutput, reprompt, null, mainImgBlurBG, false);
-      } else {
-          speechOutput = 'Unfortunately, ' + skillQuizName + ' is not supported on this device, but you can still learn about the wonder of berries which in my opinion is far more fun. What would you like to do?';
-          reprompt = 'What would you like to do?';
+            return bodyTemplateMaker('BodyTemplate7', handlerInput, mainImage, 'Time to play ' + skillQuizName + '!', null, null, speechOutput, reprompt, null, mainImgBlurBG, false);
+        } else {
+            speechOutput = 'Unfortunately, ' + skillQuizName + ' is not supported on this device, but you can still learn about the wonder of berries which in my opinion is far more fun. What would you like to do?';
+            reprompt = 'What would you like to do?';
 
-          saveLastThingSaid(handlerInput, speechOutput)
+            saveLastThingSaid(handlerInput, speechOutput)
 
-          return response.speak(speechOutput).reprompt(reprompt).getResponse();
-      }
-  } else if (supportsDisplay.call(this) && !testingOnSim) {
-      speechOutput = 'You are already in the middle of a game. Please answer the question: ' + attributes.storedQuestion;
+            return response.speak(speechOutput).reprompt(reprompt).getResponse();
+        }
+    } else if (supportsDisplay.call(this) && !testingOnSim) {
+        speechOutput = 'You are already in the middle of a game. Please answer the question: ' + attributes.storedQuestion;
 
 
-      response.withShouldEndSession(null);
+        response.withShouldEndSession(null);
 
-      saveLastThingSaid(handlerInput, speechOutput);
+        saveLastThingSaid(handlerInput, speechOutput);
 
-      return response.speak(speechOutput).getResponse();
-  }
+        return response.speak(speechOutput).getResponse();
+    }
 }
 
 const QuizIntentHandler = {
@@ -280,7 +258,7 @@ const MoreInfoIntentHandler = {
             response.withShouldEndSession(null);
 
             saveLastThingSaid(handlerInput, speechOutput);
-            
+
             console.log(111)
 
             return response.speak(speechOutput).getResponse();
@@ -321,7 +299,7 @@ const StopIntentHandler = {
     handle(handlerInput) {
 
 
-    return endSkill(handlerInput);
+        return endSkill(handlerInput);
     },
 };
 
@@ -367,7 +345,6 @@ const InformationIntentHandler = {
         var reprompt;
 
         newSessionHandler(handlerInput);
-        resetAttributes(handlerInput);
 
         const attributes = handlerInput.attributesManager.getSessionAttributes();
         if (attributes.skillState == 'gamePlaying') {
@@ -406,7 +383,7 @@ const HelpIntentHandler = {
 
         if (attributes.skillState == 'gamePlaying') {
             speechOutput = 'In ' + skillQuizName + ', you simply need to select the option that most resembles the ' + categorySingular + ' being asked for in the question; either say 1 - 4, or touch the screen!';
-            
+
             response.withShouldEndSession(null);
 
             saveLastThingSaid(handlerInput, speechOutput)
@@ -436,7 +413,7 @@ const ElementSelectedHandler = {
             var correctQIndex = attributes.correctIndex;
             var quizOptions = attributes.QuizOptionArray;
             var currentQNo = attributes.questionNumber;
-            
+
             console.log(handlerInput.requestEnvelope.request.intent.slots.numberValue.value)
 
             if (handlerInput.requestEnvelope.request.token) {
@@ -460,7 +437,7 @@ const ElementSelectedHandler = {
                         speechOutput = 'Please select a number between 1 and ' + optionsArray.length;
 
                         response.withShouldEndSession(null);
-                        
+
                         saveLastThingSaid(handlerInput, speechOutput);
 
                         return response.speak(speechOutput).getResponse();
@@ -469,14 +446,13 @@ const ElementSelectedHandler = {
                     //Game has ended
                     return handleAnswer(handlerInput, correctQIndex + 1, userChoiceNumber, quizOptions, true);
                 }
-            } else
-            {
+            } else {
                 console.log(123)
                 return handleUnknown(handlerInput);
             }
         } else //User is not playing game
         {
-           
+
             var objectArray = attributes.mainArray;
 
             //Screen touched
@@ -492,7 +468,7 @@ const ElementSelectedHandler = {
                     //read out information
                     var selectedIndex = attributes.selectedValueIndex;
                     speechOutput = objectArray[selectedIndex].info;
-                    
+
                     response.withShouldEndSession(null);
 
                     saveLastThingSaid(handlerInput, speechOutput);
@@ -533,9 +509,9 @@ const ElementSelectedHandler = {
                     return showSpecificItemInfo(handlerInput, userChoiceNumber1 - 1, objectArray);
                 } else {
                     speechOutput = 'Please say a number between 1 and ' + objectArray.length;
-                    
+
                     response.withShouldEndSession(null);
-                    
+
                     saveLastThingSaid(handlerInput, speechOutput);
 
                     return response.speak(speechOutput).getResponse();
@@ -565,8 +541,7 @@ const NoIntentHandler = {
         //User wants to stop playing game
         if (attributes.skillState == 'gamePlaying') {
             return showSkillIntro(speechOutput, reprompt, handlerInput);
-        } 
-        else {
+        } else {
             return endSkill(handlerInput);
         }
     },
@@ -617,12 +592,31 @@ const YesIntentHandler = {
                 .speak(speechOutput)
                 .reprompt(speechOutput)
                 .getResponse();
-        } 
-        else {
+        } else {
             return handleUnknown(handlerInput);
         }
     },
 };
+
+exports.handler = skillBuilder
+    .addRequestHandlers(
+        LaunchRequestHandler,
+        InformationIntentHandler,
+        YesIntentHandler,
+        NoIntentHandler,
+        HelpHandler,
+        ElementSelectedHandler,
+        HelpIntentHandler,
+        CancelIntentHandler,
+        StopIntentHandler,
+        RepeatIntentHandler,
+        MoreInfoIntentHandler,
+        QuizIntentHandler,
+        PreviousIntentHandler,
+        SessionEndedRequestHandler
+    )
+    .addErrorHandlers(ErrorHandler)
+    .lambda();
 
 ////////3. Helper functions//////////////////////////////////////////////////////////////////////////
 //Generic functions///////////////////////////////////////////////////////////////////
@@ -631,7 +625,7 @@ function matchChecker(pArray, pCompare1) {
         //Find out which value 
         if (pCompare1.toLowerCase() == pArray[i].name.toLowerCase() || pCompare1.toLowerCase() == pArray[i].token.toLowerCase()) {
             //Returns index of match for later use
-            return i; 
+            return i;
         }
     }
 }
@@ -678,7 +672,7 @@ function showSpecificItemInfo(pHandlerInput, pIndex, pArray) {
     //User has selected a single fruit to get more info
     const attributes = pHandlerInput.attributesManager.getSessionAttributes();
     const response = pHandlerInput.responseBuilder;
-    
+
     attributes.selectedValueIndex = pIndex;
 
     if (supportsDisplay(pHandlerInput) && !testingOnSim) {
@@ -686,7 +680,7 @@ function showSpecificItemInfo(pHandlerInput, pIndex, pArray) {
     } else {
         var reprompt = 'Which ' + categorySingular + ' would you like to hear about now?';
         var speechOutput = pArray[pIndex].info + ' ' + reprompt;
-        
+
         saveLastThingSaid(pHandlerInput, speechOutput);
 
         return response.speak(speechOutput).reprompt(reprompt).getResponse();
@@ -695,7 +689,7 @@ function showSpecificItemInfo(pHandlerInput, pIndex, pArray) {
 
 function handleAnswer(pHandlerInput, pCorrectAnswer, pUserAnswer, pArray, pGameFinished) {
     var speechOutput;
-    
+
     const attributes = pHandlerInput.attributesManager.getSessionAttributes();
 
     if (pCorrectAnswer == pUserAnswer) {
@@ -744,13 +738,13 @@ function handleAnswer(pHandlerInput, pCorrectAnswer, pUserAnswer, pArray, pGameF
         resetAttributes(pHandlerInput);
 
         if (supportsDisplay(pHandlerInput) && !testingOnSim) {
-            
+
             var text = '<b><font size="7">' + correctAnswersVal + ' / ' + pArray.length + ' correct.</font></b>';
             return bodyTemplateMaker('BodyTemplate2', pHandlerInput, gameoverImage, cardTitle, text, '<br/>' + speechOutput2, null, speechOutput, null, "tell me about berries", mainImgBlurBG, false);
 
         } else {
             const response = pHandlerInput.responseBuilder;
-            
+
             response.withShouldEndSession(null);
 
             saveLastThingSaid(pHandlerInput, speechOutput);
@@ -868,7 +862,8 @@ function bodyTemplateMaker(pBodyTemplateType, pHandlerInput, pImg, pTitle, pText
     const image = imageMaker("", pImg);
     const richText = richTextMaker(pText1, pText2, pText3);
     const backgroundImage = imageMaker("", pBackgroundIMG);
-    
+    const title = pTitle;
+
     console.log('setting body template')
 
     response.addRenderTemplateDirective({
@@ -876,7 +871,7 @@ function bodyTemplateMaker(pBodyTemplateType, pHandlerInput, pImg, pTitle, pText
         backButton: 'visible',
         image,
         backgroundImage,
-        pTitle,
+        title,
         textContent: richText,
     });
 
